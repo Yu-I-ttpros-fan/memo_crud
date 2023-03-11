@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   def self.find_or_create_from_auth_hash!(auth_hash)
     recieved_provider = auth_hash[:provider]
-    recieved_uid = auth_hash[:id]
+    recieved_uid = auth_hash[:uid]
     recieved_nickname = auth_hash[:info][:nickname]
     recieved_image_url = auth_hash[:info][:image]
 
