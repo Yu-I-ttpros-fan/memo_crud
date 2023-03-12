@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :memos
   root 'welcome#index'
   get '/auth/:provider/callback' => 'sessions#create'
   delete '/signout' => 'sessions#destroy'
