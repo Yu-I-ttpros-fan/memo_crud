@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MemoApp</title>
+    <title>メモ登録・閲覧アプリ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
-  <body>
-  <header class="navbar nabvar-expand-sm navbar-light" style="background-color:#6d33ff;">
-    <div class="container">
-      <%= link_to "メモ登録・閲覧ページ", root_path, class: "navbar-brand",style: "color: #FFEDB3;" %>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-        <% if signed_in? %>
-          <%= link_to "サインアウト", signout_path, class: "nav-link",style: "color: #FFEDB3;", data: { turbo_method: :delete } %>
-        <% else %>
-          <%= button_to "GitHubでサインイン", "/auth/github", style: "color: #FFEDB3; background-color:#6d33ff;",method: :post, data: { turbo: false }%>
-        <% end %>
-        </li>
-      </ul>
-    </div>
-  </header>
-  <div class="container" style="background-color:#B3D9FF;">
-    <% if flash.notice %>
-      <div class="alert alert-success">
-        <%= flash.notice %>
+  <body style="background-image: url(<%= asset_path 'blue_00105.jpg' %>);">
+    <header class="navbar nabvar-expand-sm navbar-light" style="background-color:#00AEEF;">
+      <div class="container">
+        <%= link_to "メモ登録・閲覧ページ", root_path, class: "navbar-brand" %>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <% if signed_in? %>
+              <%= link_to "サインアウト", signout_path, class: "nav-link",data: { turbo_method: :delete } %>
+            <% else %>
+              <%= button_to "GitHubでサインイン", "/auth/github", style: "color: #FFEDB3; background-color:#000080;",method: :post, data: { turbo: false }%>
+            <% end %>
+          </li>
+        </ul>
       </div>
-    <% end %>
-    <%= yield %>
-  </div>
+    </header>
+    <div class="container" style="background-color:#FFFFFB;">
+      <% if flash.notice %>
+        <div class="alert alert-success">
+          <%= flash.notice %>
+        </div>
+      <% end %>
+      <% if flash.alert %>
+        <div class="alert alert-danger">
+          <%= flash.alert %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
