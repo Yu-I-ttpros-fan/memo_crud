@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :create_memos, class_name: 'Memo'
   def self.find_or_create_from_auth_hash!(auth_hash)
     recieved_provider = auth_hash[:provider]
     recieved_uid = auth_hash[:uid]
