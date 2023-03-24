@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate
-  helper_method :signed_in?
+  helper_method :signed_in?, :current_user
 
   private
 
   def signed_in?
-    !!session[:user_id]
+    !!current_user
   end
 
   def current_user
