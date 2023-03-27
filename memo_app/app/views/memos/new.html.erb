@@ -2,6 +2,7 @@
 <h3>「タイトル」「メモ」に残しておきたい内容を記入してください</h3>
 
 <%= form_with model: @memo, class: "form-horizonal" do |form| %>
+    <%= render 'application/errors', object: form.object %>
     <div class="form-group">
         <%= form.label :title, "タイトル" %>
         <%= form.text_field :title, class: "form-control" %>

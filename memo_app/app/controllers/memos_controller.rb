@@ -10,8 +10,10 @@ class MemosController < ApplicationController
   def create
     @memo = current_user.create_memos.build(memo_params)
 
-    if @create_memo.save
+    if @memo.save
       redirect_to memos_path, notice: '新規メモを登録しました'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
