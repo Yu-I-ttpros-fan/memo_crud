@@ -1,6 +1,7 @@
 class MemosController < ApplicationController
   def index
-    # メモ一覧を表示させる
+    # ユーザごとにメモ一覧を表示させる
+    @memos = current_user.memos.all.order(created_at: :desc)
   end
 
   def new

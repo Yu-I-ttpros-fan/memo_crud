@@ -1,5 +1,18 @@
+<h1>メモ一覧</h1>
 <ul class="navbar-nav">
     <li class="nav-item">
         <%= link_to "メモを新規作成",new_memo_path,style: "color: #FFEDB3; background-color:#000080;" %>
     </li>
 </ul>
+<div class="card mb-2">
+    <%- @memos.each do |memo|%>
+        <h5 class="card-header">タイトル</h5>
+        <div class="card-body">
+            <p class="card-body"><%= memo.title %></p>
+        </div>
+            <h5 class="card-header">メモ</h5>
+        <div class="card-body">
+            <p class="card-body"><%= memo.content %></p>
+        </div>
+    <% end %>
+</div>
