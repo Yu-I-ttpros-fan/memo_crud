@@ -1,18 +1,3 @@
 <h1 class="mt-2">メモ登録ページ</h1>
 <h3>「タイトル」「メモ」に残しておきたい内容を記入してください</h3>
-
-<%= form_with model: @memo, class: "form-horizonal" do |form| %>
-    <%= render 'application/errors', object: form.object %>
-    <div class="form-group">
-        <%= form.label :title, "タイトル" %>
-        <%= form.text_field :title, class: "form-control" %>
-        <p>タイトルを記入してください(50字以内)</p>
-    </div>
-    <div class="form-group">
-        <%= form.label :content, "メモ" %>
-        <%= form.text_area :content, class: "form-control", row: 10 %>
-        <p>メモとして残したい内容を記入してください(500字以内)</p>
-    </div>
-    <%= form.submit "メモを登録する", class: "btn btn-primary"  %>
-<% end %>
-<%= link_to "メモ一覧画面に戻る", memos_path, style: "color: #FFEDB3; background-color:#000080;" %>
+<%= render 'memos/fillmemo',memo: @memo %>
