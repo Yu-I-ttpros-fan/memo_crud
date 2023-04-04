@@ -2,3 +2,6 @@
 <p>サインインしてメモを登録しましょう！</p>
 <hr>
 <p>登録したメモを読み返したり変更したりしましょう！</p>
+<% if signed_in? %>
+    <%= link_to "メモ登録ページへ",memos_path,style: "color: #FFEDB3; background-color:#000080;"%>
+<% end %>
