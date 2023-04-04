@@ -31,6 +31,12 @@ class MemosController < ApplicationController
     end
   end
 
+  def destroy
+    @memo = current_user.created_memos.find(params[:id])
+    @memo.destroy!
+    redirect_to memos_path, notice: '削除しました', status: :see_other
+  end
+
   private
 
   def memo_params

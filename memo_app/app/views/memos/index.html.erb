@@ -4,8 +4,9 @@
         <%= link_to "メモを新規作成",new_memo_path,class: "btn btn-info btn-block", style: "color: #FFEDB3; background-color:#000080;" %>
     </li>
 </ul>
-<div class="card mb-2">
+
     <%- @memos.each do |memo|%>
+    <div class="card mb-2">
         <h5 class="card-header">タイトル</h5>
         <div class="card-body">
             <p class="card-body"><%= memo.title %></p>
@@ -16,6 +17,8 @@
         </div>
         <div class="card-footer">
             <%= link_to "メモを編集する", edit_memo_path(memo),class: "btn btn-info btn-block"%>
-        </div>   
+            <%= link_to "メモを削除する", memo_path(memo), class: "btn btn-danger btn-block",data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}%>
+        </div>
+    </div>
+    <br>
     <% end %>
-</div>
