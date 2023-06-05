@@ -18,6 +18,7 @@
               <%= link_to "サインアウト", signout_path, class: "nav-link",data: { turbo_method: :delete } %>
             <% else %>
               <%= button_to "GitHubでサインイン", "/auth/github", style: "color: #FFEDB3; background-color:#000080;",method: :post, data: { turbo: false }%>
+              <%= button_to "Googleでサインイン", "/auth/google_oauth2", style: "color: #FFEDB3; background-color:#408000;",method: :post, data: { turbo: false }%>
             <% end %>
           </li>
         </ul>

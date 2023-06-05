@@ -12,13 +12,13 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     GOOGLE_CLIENT_SECRET = credentials['google']['client_secret']
 
     provider :github, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET
-    provider :google_auth2, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+    provider :google_oauth2, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
   else
     # 平文で渡すのは危ないので暗号化、複合化
     provider :github,
              Rails.application.credentials.github[:client_id],
              Rails.application.credentials.github[:client_secret]
-    provider :google_auth2,
+    provider :google_oauth2,
               Rails.application.credentials.google[:client_id],
               Rails.application.credentials.google[:client_secret]
   end
