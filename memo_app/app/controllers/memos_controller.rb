@@ -3,11 +3,6 @@ class MemosController < ApplicationController
     @memos = memo_display
     @genres = Genre.all
     @selected_genre_id = params[:genre_id].presence
-
-    respond_to do |format|
-      format.html
-      format.js # format.jsの処理を追加
-    end
   end
 
   def new

@@ -4,7 +4,10 @@
     <%= link_to "メモを新規作成", new_memo_path, class: "btn btn-info btn-block", style: "color: #FFEDB3; background-color:#000080;" %>
   </li>
   <li class="nav-item">
-    <%= render partial: "genre_select" %>
+    <%= form_with url: memos_path, method: :get, local: false,class: "form-horizontal" do |form| %>
+      <%= genre_collection_select(form) %>
+      <%= form.submit "検索", class: "btn btn-primary" %>
+    <% end %>
   </li>
 </ul>
 <div id="memos-container">

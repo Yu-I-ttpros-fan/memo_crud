@@ -1,5 +1,0 @@
-const memosList = '<%= j render partial: "memos_list", locals: { memos: @memos } %>';
-document.getElementById('memos-container').innerHTML = memosList;
-
-const select = document.getElementById('genre_id');
-select.value = '<%= @selected_genre_id.presence || '' %>';
