@@ -1,7 +1,13 @@
 class MemosController < ApplicationController
   def index
-    # ユーザごとにメモ一覧を表示させる
-    @memos = current_user.created_memos.all.order(created_at: :desc)
+    @memos = memo_display
+    @genres = Genre.all
+    @selected_genre_id = params[:genre_id].presence
+
+    respond_to do |format|
+      format.html
+      format.js # format.jsの処理を追加
+    end
   end
 
   def new
@@ -44,7 +50,7 @@ class MemosController < ApplicationController
 
   def memo_params
     params.require(:memo).permit(
-      :title, :content, :genre_id
+      :title, :content, :genre_id, :commit
     )
   end
 
@@ -53,6 +59,18 @@ class MemosController < ApplicationController
   end
 
   def set_genre_id_from_params
+    # 編集、登録画面でのジャンルの登録
     @memo.genre_id = params[:memo][:genre_id] if params[:memo][:genre_id].present?
+  end
+
+  def memo_display
+    # 表示しやすいように機能を追加しやすいように処理を切り出し
+    # デフォルト表示
+    memos = current_user.created_memos.order(created_at: :desc)
+
+    # ジャンルで表示数を絞る
+    memos = memos.where(genre_id: params[:genre_id]).order(created_at: :desc) if params[:genre_id].present?
+
+    memos
   end
 end

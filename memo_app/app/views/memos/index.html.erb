@@ -1,24 +1,13 @@
 <h1>メモ一覧</h1>
 <ul class="navbar-nav">
-    <li class="nav-item">
-        <%= link_to "メモを新規作成",new_memo_path,class: "btn btn-info btn-block", style: "color: #FFEDB3; background-color:#000080;" %>
-    </li>
+  <li class="nav-item">
+    <%= link_to "メモを新規作成", new_memo_path, class: "btn btn-info btn-block", style: "color: #FFEDB3; background-color:#000080;" %>
+  </li>
+  <li class="nav-item">
+    <%= render partial: "genre_select" %>
+  </li>
 </ul>
+<div id="memos-container">
+  <%= render partial: "memos_list", locals: { memos: @memos } %>
+</div>
 
-    <%- @memos.each do |memo|%>
-    <div class="card mb-2">
-        <h5 class="card-header">タイトル</h5>
-        <div class="card-body">
-            <p class="card-body"><%= memo.title %></p>
-        </div>
-            <h5 class="card-header">メモ</h5>
-        <div class="card-body">
-            <p class="card-body"><%= memo.content %></p>
-        </div>
-        <div class="card-footer">
-            <%= link_to "メモを編集する", edit_memo_path(memo),class: "btn btn-info btn-block"%>
-            <%= link_to "メモを削除する", memo_path(memo), class: "btn btn-danger btn-block",data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}%>
-        </div>
-    </div>
-    <br>
-    <% end %>
