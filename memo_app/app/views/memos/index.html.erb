@@ -6,7 +6,11 @@
   <li class="nav-item">
     <%= form_with url: memos_path, method: :get, local: false,class: "form-horizontal" do |form| %>
       <%= genre_collection_select(form) %>
-      <%= form.submit "検索", class: "btn btn-primary" %>
+      <%= form.submit "ジャンルを指定", class: "btn btn-primary" %><br>
+    <% end %>
+    <%= form_with url: memos_path, method: :get, local: false do |form| %>
+      <%= form.select :order_by, options_for_select([['新しい順', 'desc'],['古い順', 'asc']]) %>
+      <%= form.submit '並び替え', class: "btn btn-secondary"%>
     <% end %>
   </li>
 </ul>

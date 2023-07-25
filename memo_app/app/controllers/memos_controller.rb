@@ -61,10 +61,11 @@ class MemosController < ApplicationController
   def memo_display
     # 表示しやすいように機能を追加しやすいように処理を切り出し
     # デフォルト表示
-    memos = current_user.created_memos.order(created_at: :desc)
+    order = params[:order_by].present? ? params[:order_by] : 'desc'
+    memos = current_user.created_memos.order(created_at: order)
 
     # ジャンルで表示数を絞る
-    memos = memos.where(genre_id: params[:genre_id]).order(created_at: :desc) if params[:genre_id].present?
+    memos = memos.where(genre_id: params[:genre_id]).order(created_at: order) if params[:genre_id].present?
 
     memos
   end
