@@ -3,17 +3,20 @@
   <li class="nav-item">
     <%= link_to "メモを新規作成", new_memo_path, class: "btn btn-info btn-block", style: "color: #FFEDB3; background-color:#000080;" %>
   </li>
+  <br>
   <li class="nav-item">
     <%= form_with url: memos_path, method: :get, local: false,class: "form-horizontal" do |form| %>
       <%= genre_collection_select(form) %>
-      <%= form.submit "ジャンルを指定", class: "btn btn-primary" %><br>
-    <% end %>
-    <%= form_with url: memos_path, method: :get, local: false do |form| %>
-      <%= form.select :order_by, options_for_select([['新しい順', 'desc'],['古い順', 'asc']]) %>
-      <%= form.submit '並び替え', class: "btn btn-secondary"%>
+      <br>
+      <%= form.select :order_rule, options_for_select(order_rule_options) %>
+      <br>
+      <%= form.select :order_time, options_for_select(order_time_options) %>
+      <br>
+      <%= form.submit '表示を変更する', class: "btn btn-primary"%>
     <% end %>
   </li>
 </ul>
+<br>
 <div id="memos-container">
   <%= render partial: "memos_list", locals: { memos: @memos } %>
 </div>
