@@ -2,11 +2,11 @@
   <div class="card mb-2">
     <h5 class="card-header">タイトル</h5>
     <div class="card-body">
-      <p class="card-body"><%= memo.title %></p>
+      <p><%= memo.title %></p>
     </div>
     <h5 class="card-header">メモ</h5>
     <div class="card-body">
-      <p class="card-body"><%= memo.content %></p>
+      <p><%= simple_format(memo.content) %></p>
     </div>
     <div class="card-header">作成日時:<%= memo.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
     <div class="card-header">更新日時:<%= memo.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
