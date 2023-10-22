@@ -12,6 +12,6 @@ FactoryBot.define do
         sequence(:uid) { |i| "google_uid#{i}" }
         sequence(:name) { |i| "Googleユーザ#{i}" }
         sequence(:image_url) { |i| "http://example.com/google_image#{i}.jpg" }
-        end
+    end
   end
 end

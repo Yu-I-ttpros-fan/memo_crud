@@ -1,27 +1,37 @@
 module SignInHelper
-  def sign_in_mock(user)
-    # auth/provider/callbackにリダイレクトする用
-    Omniauth.config.test_mode = true
-    # auth/provider/callbackにリダイレクトされた際に渡されるデータを準備する
-    Omniauth.config.add_mock(
-      provider: user.provider.to_sym,
-      uid: user.id,
-      info: { name: user.name,
-              image: user.image }
-    )
-  end
-
+  
   def sign_in_github(user)
-    sign_in_mock(user)
+  # GitHubのモックデータを設定
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:github, {
+    provider: 'github',
+    uid: user.uid, # ユーザーのuidを使用
+    info: {
+      nickname: user.name, # ユーザー名
+      image: user.image_url # 画像URL
+    }
+  })
+
+  #作成したデータをもとにサインインテスト
     visit root_url
-    click_on 'GitHubでログイン'
+    click_on 'GitHubでサインイン'
     @current_user = user
   end
 
   def sign_in_google_auth(user)
-    sign_in_mock(user)
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.add_mock(:google_oauth2, {
+      provider: 'google_oauth2',
+      uid: user.uid, # ユーザーのuidを使用
+      info: {
+        name: user.name, # ユーザー名
+        image: user.image_url # 画像URL
+      }
+    })
+
+    #作成したデータをもとにサインインテスト
     visit root_url
-    click_on 'Googleでログイン'
+    click_on 'Googleでサインイン'
     @current_user = user
   end
 
