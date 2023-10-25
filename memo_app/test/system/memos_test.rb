@@ -32,5 +32,22 @@ class MemosTest < ApplicationSystemTestCase
   assert_selector "div.alert", text: "新規メモを登録しました"
   end
 
+  test 'メモを削除する' do
+      # github認証テストがあるためsetupメソッドを使わずに記載した
+      user = FactoryBot.create(:user, :google_oauth2)
+      sign_in_google_auth(user)
+
+      memo = FactoryBot.create(:memo, user: current_user)
+      visit memos_url
+      assert_difference("Memo.count", -1) do
+        accept_confirm do
+          click_on "メモを削除する"
+        end
+        assert_selector "div.alert", text: "削除しました"
+      end
+
+  end
+
+
 
 end
