@@ -37,7 +37,7 @@ class MemosTest < ApplicationSystemTestCase
       user = FactoryBot.create(:user, :google_oauth2)
       sign_in_google_auth(user)
 
-      memo = FactoryBot.create(:memo, user: current_user)
+      FactoryBot.create(:memo, user: current_user)
       visit memos_url
       assert_difference("Memo.count", -1) do
         accept_confirm do
