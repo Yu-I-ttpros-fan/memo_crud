@@ -3,8 +3,8 @@ class Memo < ApplicationRecord
   validates :title, length: { maximum: 50 }, presence: true
   validates :content, length: { maximum: 500 }, presence: true
 
-  def self.memo_display(params,current_user)
-    # 表示しやすいように機能を追加しやすいように処理を切り出し
+  def self.memo_display(params, current_user)
+    # 表示しやすいよう、機能を追加しやすいように処理を切り出し
     order_rule, order_time = change_order(params)
     memos = current_user.created_memos.order("#{order_rule} #{order_time}")
 
