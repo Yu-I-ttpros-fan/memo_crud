@@ -29,14 +29,21 @@ class MemoTest < ActiveSupport::TestCase
    end
 
    test "change_orderの更新順で並び替えられること" do
-
+      params = { order_rule: 'updated_at', order_time: 'desc'}
+      order_rule, order_time = Memo.change_order(params)
+      assert_equal 'updated_at', order_rule
+      assert_equal 'desc', order_time
    end
 
    test "memo_displayで更新順で並び替えられること" do
-
+      params = { order_rule: 'updated_at', order_time: 'desc' }
+      @memo1.update(content: '内容1-1')
+      @memo3.update(content: '内容3-1')
+      @memo2.update(content: '内容2-1')
+      memos = Memo.memo_display(params, @user)
+      assert_equal [@memo2, @memo3, @memo1], memos
    end
 
    test "ジャンルを指定できること" do
-    
    end
 end
