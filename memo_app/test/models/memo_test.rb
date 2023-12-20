@@ -4,8 +4,12 @@ class MemoTest < ActiveSupport::TestCase
 
    setup do
       @user = FactoryBot.create(:user)
-      @memo1 = FactoryBot.create(:memo, user: @user, created_at: 3.days.ago)
-      @memo2 = FactoryBot.create(:memo, user: @user, created_at: 2.days.ago)
+      # ジャンル指定
+      @genre1 = FactoryBot.create(:genre, name: "ジャンル1")
+      @genre2 = FactoryBot.create(:genre, name: "ジャンル2")
+
+      @memo1 = FactoryBot.create(:memo, user: @user, created_at: 3.days.ago, genre_id: @genre1.id)
+      @memo2 = FactoryBot.create(:memo, user: @user, created_at: 2.days.ago, genre_id: @genre2.id)
       @memo3 = FactoryBot.create(:memo, user: @user, created_at: 1.day.ago)
    end
 
@@ -45,5 +49,17 @@ class MemoTest < ActiveSupport::TestCase
    end
 
    test "ジャンルを指定できること" do
+      @memo4 = FactoryBot.create(:memo, user: @user, genre_id: @genre1.id)
+
+      #ジャンルを指定
+      params_with_genre = { genre_id: @genre1.id }
+      memos_with_genre = Memo.memo_display(params_with_genre, @user)
+      assert_equal [@memo4,@memo1], memos_with_genre
+
+      #ジャンルを設定しない
+      params_without_genre = {}
+      memos_no_set_genre = Memo.memo_display(params_without_genre, @user)
+      assert_equal [@memo4,@memo3,@memo2,@memo1], memos_no_set_genre
+      
    end
 end
