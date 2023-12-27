@@ -9,6 +9,9 @@ class MemoTest < ActiveSupport::TestCase
       @title_within_50 = Faker::Lorem.characters(number: 50)
       @title_over_50 = Faker::Lorem.characters(number: 51)
 
+      @memo_within_500 =  Faker::Lorem.characters(number: 500)
+      @memo_over_500 = Faker::Lorem.characters(number: 501)
+
       #オリジナル
       @memo = FactoryBot.create(:memo, user: @user)
    end
@@ -25,9 +28,14 @@ class MemoTest < ActiveSupport::TestCase
    end
 
    test 'メモが500字なら登録できること' do
-
+      @memo.update(content: @memo_within_500)
+      @memo.valid?
+      assert_empty(@memo.errors[:content])
    end
+
    test 'メモが500字以上の場合エラーとなること' do
-      
+      @memo.update(content: @memo_over_500)
+      @memo.valid?
+      assert_not_empty(@memo.errors[:content])
    end
 end
