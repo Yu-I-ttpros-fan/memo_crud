@@ -12,6 +12,7 @@
 他思いついたら拡張していきます。
 
 ## 環境構築手順
+### ※ubuntuを想定しております。windowsの場合はwsl上からご利用ください。
 ruby-buildインストール
 ```
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
